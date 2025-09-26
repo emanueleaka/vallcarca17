@@ -15,35 +15,61 @@
     .content {
       text-align: center;
     }
+    .items {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap; /* permette di andare a capo su schermi piccoli */
+      gap: 20px;
+    }
     .item {
       display: inline-block;
-      margin: 0 20px; /* spazio tra le immagini */
+      text-align: center;
+    }
+    .item a {
+      text-decoration: none;  /* toglie la sottolineatura */
+      color: inherit;         /* mantiene il colore del testo */
     }
     .item img {
       width: 200px;
       height: 200px;
       object-fit: cover;
       border-radius: 8px;
+      transition: transform 0.2s; /* effetto hover */
+    }
+    .item img:hover {
+      transform: scale(1.05); /* ingrandisce leggermente al passaggio */
     }
     .item p {
       margin-top: 10px;
       font-size: 18px;
       font-weight: bold;
     }
+
+    /* 📱 Responsive: sotto i 500px di larghezza, le immagini si mettono in colonna */
+    @media (max-width: 500px) {
+      .items {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="content">
-    <h1>Benvenuto nel mio sito</h1>
+    <div class="items">
+      <div class="item">
+        <a href="project.html">
+          <img src="images/project.jpg" alt="Project">
+          <p>Project</p>
+        </a>
+      </div>
 
-    <div class="item">
-      <img src="images/project.jpg" alt="Project">
-      <p>Project</p>
-    </div>
-
-    <div class="item">
-      <img src="images/reference.jpg" alt="Reference">
-      <p>References</p>
+      <div class="item">
+        <a href="references.html">
+          <img src="images/reference.jpg" alt="Reference">
+          <p>References</p>
+        </a>
+      </div>
     </div>
   </div>
 </body>

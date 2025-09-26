@@ -7,53 +7,63 @@
   <style>
     body {
       font-family: Arial, Helvetica, sans-serif;
-      margin: 20px;
+      margin: 0;
+      height: 100vh; /* prende tutta la finestra */
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
-    h1 {
+    .items {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 40px;
       text-align: center;
-      margin-bottom: 20px;
     }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 12px;
+    .item a {
+      text-decoration: none;
+      color: inherit;
     }
-    .card {
-      position: relative;
-      overflow: hidden;
-      border-radius: 10px;
-      background: #f7f7f7;
-      aspect-ratio: 1/1; /* quadrata */
-    }
-    .card img {
-      width: 100%;
-      height: 100%;
+    .item img {
+      width: 200px;
+      height: 200px;
       object-fit: cover;
-      display: block;
+      border-radius: 8px;
       transition: transform .2s ease;
     }
-    .card:hover img {
-      transform: scale(1.03);
+    .item img:hover {
+      transform: scale(1.05);
     }
-    .back {
-      display: inline-block;
-      margin-bottom: 14px;
+    .item p {
+      margin-top: 10px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    /* 📱 Responsive */
+    @media (max-width: 500px) {
+      .items {
+        flex-direction: column;
+        align-items: center;
+      }
     }
   </style>
 </head>
 <body>
-  <a class="back" href="index.html">← Home</a>
-  <h1>References</h1>
+  <div class="items">
+    <div class="item">
+      <a href="edges.html">
+        <img src="images/references/edges/3f9ea81743b5613d405d359dc94a7795.jpg" alt="Bordes">
+        <p>Bordes</p>
+      </a>
+    </div>
 
-  <div class="grid">
-    <div class="card"><img src="images/references/4508be190e9573d6deaa576512fc306d.jpg" alt=""></div>
-    <div class="card"><img src="images/references/b1a2f691e6d4aeec32942bef4e1801f4.jpg" alt=""></div>
-    <div class="card"><img src="images/references/beb3f955059b79491812971e57d3c42f.jpg" alt=""></div>
-    <div class="card"><img src="images/references/bec28f301ace5d2dfd7904c222106a4f.jpg" alt=""></div>
-    <div class="card"><img src="images/references/ibizenca.jpg" alt="Ibizenca"></div>
-    <div class="card"><img src="images/references/ibiza.jpg" alt="Ibiza"></div>
-    <div class="card"><img src="images/references/wood.jpg" alt="Wood"></div>
-    <div class="card"><img src="images/references/luce.jpg" alt="Luce"></div>
+    <div class="item">
+      <a href="lights.html">
+        <img src="images/references/luci.jpg" alt="Luces">
+        <p>Luces</p>
+      </a>
+    </div>
   </div>
 </body>
 </html>

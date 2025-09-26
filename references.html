@@ -1,0 +1,44 @@
+---
+layout: none
+title: References
+---
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>References</title>
+  <style>
+    body { font-family: Arial, Helvetica, sans-serif; margin: 20px; }
+    h1 { text-align: center; margin-bottom: 20px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+    }
+    .card {
+      overflow: hidden;
+      border-radius: 10px;
+      aspect-ratio: 1/1;
+      background:#f7f7f7;
+    }
+    .card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <h1>References</h1>
+  <div class="grid">
+    {% assign pics = site.static_files | where_exp:'f','f.path contains "/images/references/"' %}
+    {% for f in pics %}
+      <div class="card">
+        <img src="{{ f.path }}" alt="{{ f.name }}">
+      </div>
+    {% endfor %}
+  </div>
+</body>
+</html>

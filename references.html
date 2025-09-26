@@ -1,8 +1,3 @@
----
-layout: none
-title: References
----
-
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -10,20 +5,25 @@ title: References
   <title>References</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
-    body { font-family: Arial, Helvetica, sans-serif; margin: 20px; }
-    h1 { text-align: center; margin-bottom: 20px; }
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 20px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 12px;
-      align-items: start;
     }
     .card {
       position: relative;
       overflow: hidden;
       border-radius: 10px;
-      aspect-ratio: 1 / 1;
       background: #f7f7f7;
+      aspect-ratio: 1/1; /* quadrata */
     }
     .card img {
       width: 100%;
@@ -32,8 +32,13 @@ title: References
       display: block;
       transition: transform .2s ease;
     }
-    .card:hover img { transform: scale(1.03); }
-    .back { display: inline-block; margin-bottom: 14px; }
+    .card:hover img {
+      transform: scale(1.03);
+    }
+    .back {
+      display: inline-block;
+      margin-bottom: 14px;
+    }
   </style>
 </head>
 <body>
@@ -41,15 +46,14 @@ title: References
   <h1>References</h1>
 
   <div class="grid">
-    {%- assign pics = site.static_files | where_exp: 'f', 'f.path contains "/images/references/"' -%}
-    {%- for f in pics -%}
-      {%- assign n = f.name | downcase -%}
-      {%- if n endswith ".jpg" or n endswith ".jpeg" or n endswith ".png" or n endswith ".gif" or n endswith ".webp" -%}
-        <a class="card" href="{{ f.path }}" target="_blank" rel="noopener">
-          <img src="{{ f.path }}" alt="{{ f.name }}" loading="lazy" />
-        </a>
-      {%- endif -%}
-    {%- endfor -%}
+    <div class="card"><img src="images/references/4508be190e9573d6deaa576512fc306d.jpg" alt=""></div>
+    <div class="card"><img src="images/references/b1a2f691e6d4aeec32942bef4e1801f4.jpg" alt=""></div>
+    <div class="card"><img src="images/references/beb3f955059b79491812971e57d3c42f.jpg" alt=""></div>
+    <div class="card"><img src="images/references/bec28f301ace5d2dfd7904c222106a4f.jpg" alt=""></div>
+    <div class="card"><img src="images/references/ibizenca.jpg" alt="Ibizenca"></div>
+    <div class="card"><img src="images/references/ibiza.jpg" alt="Ibiza"></div>
+    <div class="card"><img src="images/references/wood.jpg" alt="Wood"></div>
+    <div class="card"><img src="images/references/luce.jpg" alt="Luce"></div>
   </div>
 </body>
 </html>

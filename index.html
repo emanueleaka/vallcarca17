@@ -12,32 +12,26 @@
       justify-content: center;
       align-items: center;
     }
-    .content {
-      text-align: center;
-    }
     .items {
       display: flex;
       justify-content: center;
       flex-wrap: wrap; /* permette di andare a capo su schermi piccoli */
       gap: 20px;
-    }
-    .item {
-      display: inline-block;
       text-align: center;
     }
     .item a {
-      text-decoration: none;  /* toglie la sottolineatura */
-      color: inherit;         /* mantiene il colore del testo */
+      text-decoration: none;  /* niente sottolineatura */
+      color: inherit;         /* mantiene colore testo */
     }
     .item img {
       width: 200px;
       height: 200px;
       object-fit: cover;
       border-radius: 8px;
-      transition: transform 0.2s; /* effetto hover */
+      transition: transform 0.2s;
     }
     .item img:hover {
-      transform: scale(1.05); /* ingrandisce leggermente al passaggio */
+      transform: scale(1.05);
     }
     .item p {
       margin-top: 10px;
@@ -45,7 +39,7 @@
       font-weight: bold;
     }
 
-    /* 📱 Responsive: sotto i 500px di larghezza, le immagini si mettono in colonna */
+    /* 📱 Responsive */
     @media (max-width: 500px) {
       .items {
         flex-direction: column;
@@ -55,21 +49,19 @@
   </style>
 </head>
 <body>
-  <div class="content">
-    <div class="items">
-      <div class="item">
-        <a href="project.html">
-          <img src="images/project.jpg" alt="Project">
-          <p>Project</p>
-        </a>
-      </div>
+  <div class="items">
+    <div class="item">
+      <a href="project.html">
+        <img src="images/project.jpg" alt="Project">
+        <p>Project</p>
+      </a>
+    </div>
 
-      <div class="item">
-        <a href="references.html">
-          <img src="images/reference.jpg" alt="Reference">
-          <p>References</p>
-        </a>
-      </div>
+    <div class="item">
+      <a href="references.html">
+        <img src="images/reference.jpg" alt="Reference">
+        <p>References</p>
+      </a>
     </div>
   </div>
 </body>

@@ -12,12 +12,12 @@
     .grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 0; /* nessuno spazio tra le foto */
+      gap: 0;
     }
     .grid img {
       width: 100%;
-      height: 400px;       /* altezza fissa per anteprime */
-      object-fit: cover;   /* ritaglia in quadrato */
+      height: 400px;
+      object-fit: cover;
       display: block;
       transition: transform 0.2s ease;
       cursor: pointer;
@@ -37,6 +37,7 @@
       align-items: center;
       background: rgba(0,0,0,0.9);
       z-index: 9999;
+      flex-direction: column;
     }
     .lightbox img {
       max-width: 95vw;
@@ -54,8 +55,18 @@
       color: #fff;
       cursor: pointer;
     }
+    .arrow {
+      position: absolute;
+      top: 50%;
+      font-size: 48px;
+      color: #fff;
+      cursor: pointer;
+      user-select: none;
+      transform: translateY(-50%);
+    }
+    .arrow.left { left: 20px; }
+    .arrow.right { right: 20px; }
 
-    /* Responsive */
     @media (max-width: 900px) {
       .grid { grid-template-columns: repeat(2, 1fr); }
     }
@@ -72,24 +83,20 @@
     <img src="images/references/423a36f45b3f0163b5f81ff8b7144fdb.jpg" alt="">
     <img src="images/references/3c963ef0e100f155bc36d49385cd70d0.jpg" alt="">
     <img src="images/references/a68d5eda4254d8cde3327372e108723e.jpg" alt="">
-
-    <!-- QUI in mezzo mettiamo le due immagini spostate -->
     <img src="images/references/BCB100E-A-Dims.png" alt="">
     <img src="images/references/Screenshot 2025-09-26 185900.jpg" alt="">
-
-    <!-- Continuano le altre -->
     <img src="images/references/wood.jpg" alt="">
     <img src="images/references/ibizenca.jpg" alt="">
     <img src="images/references/ibiza.jpg" alt="">
-    <img src="images/references/b4e8daae22f9b0d7449971706ad45805.jpg" alt="">
-    <img src="images/references/luce.jpg" alt="">
     <img src="images/references/b1a2f691e6d4aeec32942bef4e1801f4.jpg" alt="">
   </div>
 
   <!-- Lightbox -->
   <div class="lightbox" id="lightbox">
     <span class="close" id="closeBtn">×</span>
+    <span class="arrow left" id="prevBtn">❮</span>
     <img id="lightImg" src="" alt="">
+    <span class="arrow right" id="nextBtn">❯</span>
   </div>
 
   <script>
@@ -97,18 +104,35 @@
     const lightbox = document.getElementById("lightbox");
     const lightImg = document.getElementById("lightImg");
     const closeBtn = document.getElementById("closeBtn");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
 
-    imgs.forEach(img => {
-      img.addEventListener("click", () => {
-        lightImg.src = img.src;
-        lightImg.alt = img.alt;
-        lightbox.classList.add("show");
-      });
+    let currentIndex = 0;
+
+    function showImage(index) {
+      currentIndex = index;
+      lightImg.src = imgs[index].src;
+      lightImg.alt = imgs[index].alt;
+      lightbox.classList.add("show");
+    }
+
+    imgs.forEach((img, index) => {
+      img.addEventListener("click", () => showImage(index));
     });
 
     closeBtn.addEventListener("click", () => {
       lightbox.classList.remove("show");
       lightImg.src = "";
+    });
+
+    prevBtn.addEventListener("click", () => {
+      currentIndex = (currentIndex - 1 + imgs.length) % imgs.length;
+      showImage(currentIndex);
+    });
+
+    nextBtn.addEventListener("click", () => {
+      currentIndex = (currentIndex + 1) % imgs.length;
+      showImage(currentIndex);
     });
 
     lightbox.addEventListener("click", (e) => {
@@ -122,6 +146,10 @@
       if (e.key === "Escape") {
         lightbox.classList.remove("show");
         lightImg.src = "";
+      } else if (e.key === "ArrowLeft") {
+        prevBtn.click();
+      } else if (e.key === "ArrowRight") {
+        nextBtn.click();
       }
     });
   </script>

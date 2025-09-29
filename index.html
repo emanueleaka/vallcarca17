@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Home Page</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+      height: 100vh; /* altezza intera finestra */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .items {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap; /* permette di andare a capo su schermi piccoli */
+      gap: 20px;
+      text-align: center;
+    }
+    .item a {
+      text-decoration: none;  /* niente sottolineatura */
+      color: inherit;         /* mantiene colore testo */
+    }
+    .item img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 8px;
+      transition: transform 0.2s;
+    }
+    .item img:hover {
+      transform: scale(1.05);
+    }
+    .item p {
+      margin-top: 10px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    /* 📱 Responsive */
+    @media (max-width: 500px) {
+      .items {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="items">
+    <div class="item">
+      <a href="project.html">
+        <img src="images/project.jpg" alt="Project">
+        <p>Project</p>
+      </a>
+    </div>
+
+    <div class="item">
+      <a href="references.html">
+        <img src="images/reference.jpg" alt="Reference">
+        <p>Referencias para bordes redondeados</p>
+      </a>
+    </div>
+  </div>
+</body>
+</html>

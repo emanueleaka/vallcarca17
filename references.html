@@ -67,13 +67,17 @@
 <body>
   <div class="grid">
     <img src="images/references/3bd4ff8254fc594c18e5fe17f273a2d1.jpg" alt="">
-    <img src="images/references/Screenshot 2025-09-26 185900.jpg" alt="">
-    <img src="images/references/BCB100E-A-Dims.png" alt="">
     <img src="images/references/c7ab369978006b8dea6347f771f2d991 (1).jpg" alt="">
     <img src="images/references/a831b2c7df58157212f3e9924fbc3775.jpg" alt="">
     <img src="images/references/423a36f45b3f0163b5f81ff8b7144fdb.jpg" alt="">
     <img src="images/references/3c963ef0e100f155bc36d49385cd70d0.jpg" alt="">
     <img src="images/references/a68d5eda4254d8cde3327372e108723e.jpg" alt="">
+
+    <!-- QUI in mezzo mettiamo le due immagini spostate -->
+    <img src="images/references/BCB100E-A-Dims.png" alt="">
+    <img src="images/references/Screenshot 2025-09-26 185900.jpg" alt="">
+
+    <!-- Continuano le altre -->
     <img src="images/references/wood.jpg" alt="">
     <img src="images/references/ibizenca.jpg" alt="">
     <img src="images/references/ibiza.jpg" alt="">
@@ -96,7 +100,6 @@
 
     imgs.forEach(img => {
       img.addEventListener("click", () => {
-        // carica immagine originale (stesso src)
         lightImg.src = img.src;
         lightImg.alt = img.alt;
         lightbox.classList.add("show");

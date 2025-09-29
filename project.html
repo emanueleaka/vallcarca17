@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Project</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body { margin: 0; font-family: Arial, Helvetica, sans-serif; }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
+
+    .card { position: relative; overflow: hidden; }
+    .card img {
+      width: 100%;
+      height: 400px;       /* anteprima quadrata */
+      object-fit: cover;   /* ritaglio */
+      display: block;
+      transition: transform .2s ease;
+      cursor: pointer;
+    }
+    .card:hover img { transform: scale(1.05); position: relative; z-index: 1; }
+
+    .number{
+      position:absolute; bottom:8px; right:8px;
+      background:rgba(0,0,0,.7); color:#fff;
+      font: bold 16px/1 Arial, Helvetica, sans-serif;
+      padding:4px 8px; border-radius:4px;
+      z-index:2; pointer-events:none;
+    }
+
+    /* Lightbox */
+    .lightbox{
+      position:fixed; inset:0; display:none;
+      justify-content:center; align-items:center;
+      background:rgba(0,0,0,.9); z-index:9999; flex-direction:column;
+    }
+    .lightbox img{ max-width:95vw; max-height:90vh; border-radius:8px; }
+    .lightbox.show{ display:flex; }
+    .close{
+      position:absolute; top:20px; right:30px;
+      font-size:32px; color:#fff; cursor:pointer;
+    }
+    .arrow{
+      position:absolute; top:50%; transform:translateY(-50%);
+      font-size:48px; color:#fff; cursor:pointer; user-select:none;
+    }
+    .arrow.left{ left:20px; } .arrow.right{ right:20px; }
+
+    /* Responsive */
+    @media (max-width:900px){ .grid{ grid-template-columns:repeat(2,1fr);} }
+    @media (max-width:600px){ .grid{ grid-template-columns:repeat(1,1fr);} }
+  </style>
+</head>
+<body>
+  <div class="grid">
+    <div class="card"><img src="images/project/iving_sqared_A.jpg" alt=""><span class="number">1</span></div>
+    <div class="card"><img src="images/project/living_smooth_A.jpg" alt=""><span class="number">2</span></div>
+    <div class="card"><img src="images/project/living_smooth_dressed_A.jpg" alt=""><span class="number">3</span></div>
+  </div>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <span class="close" id="closeBtn">×</span>
+    <span class="arrow left" id="prevBtn">❮</span>
+    <img id="lightImg" src="" alt="">
+    <span class="arrow right" id="nextBtn">❯</span>
+  </div>
+
+  <script>
+    const cards = document.querySelectorAll(".card img");
+    const lightbox = document.getElementById("lightbox");
+    const lightImg = document.getElementById("lightImg");
+    const closeBtn = document.getElementById("closeBtn");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+
+    let currentIndex = 0;
+
+    function showImage(i){
+      currentIndex = i;
+      lightImg.src = cards[i].src;
+      lightImg.alt = cards[i].alt || "";
+      lightbox.classList.add("show");
+    }
+
+    cards.forEach((img,i)=> img.addEventListener("click", ()=> showImage(i)));
+
+    closeBtn.addEventListener("click", ()=>{ lightbox.classList.remove("show"); lightImg.src=""; });
+
+    prevBtn.addEventListener("click", ()=>{
+      currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+      showImage(currentIndex);
+    });
+    nextBtn.addEventListener("click", ()=>{
+      currentIndex = (currentIndex + 1) % cards.length;
+      showImage(currentIndex);
+    });
+
+    lightbox.addEventListener("click", (e)=>{
+      if(e.target === lightbox){ lightbox.classList.remove("show"); lightImg.src=""; }
+    });
+
+    document.addEventListener("keydown", (e)=>{
+      if(e.key === "Escape") { lightbox.classList.remove("show"); lightImg.src=""; }
+      else if(e.key === "ArrowLeft") { prevBtn.click(); }
+      else if(e.key === "ArrowRight") { nextBtn.click(); }
+    });
+  </script>
+</body>
+</html>

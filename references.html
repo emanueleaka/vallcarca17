@@ -16,6 +16,7 @@
     }
     .card {
       position: relative;
+      overflow: hidden;
     }
     .card img {
       width: 100%;
@@ -25,10 +26,10 @@
       transition: transform 0.2s ease;
       cursor: pointer;
     }
-    .card img:hover {
+    .card:hover img {
       transform: scale(1.05);
-      z-index: 2;
       position: relative;
+      z-index: 1;
     }
     .number {
       position: absolute;
@@ -41,6 +42,8 @@
       padding: 4px 8px;
       border-radius: 4px;
       font-family: Arial, Helvetica, sans-serif;
+      z-index: 2; /* sempre sopra l'immagine */
+      pointer-events: none; /* clicca sempre la foto, non il numero */
     }
 
     /* Lightbox */

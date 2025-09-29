@@ -14,7 +14,10 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 0;
     }
-    .grid img {
+    .card {
+      position: relative;
+    }
+    .card img {
       width: 100%;
       height: 400px;
       object-fit: cover;
@@ -22,10 +25,22 @@
       transition: transform 0.2s ease;
       cursor: pointer;
     }
-    .grid img:hover {
+    .card img:hover {
       transform: scale(1.05);
       z-index: 2;
       position: relative;
+    }
+    .number {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-family: Arial, Helvetica, sans-serif;
     }
 
     /* Lightbox */
@@ -77,18 +92,18 @@
 </head>
 <body>
   <div class="grid">
-    <img src="images/references/3bd4ff8254fc594c18e5fe17f273a2d1.jpg" alt="">
-    <img src="images/references/c7ab369978006b8dea6347f771f2d991 (1).jpg" alt="">
-    <img src="images/references/a831b2c7df58157212f3e9924fbc3775.jpg" alt="">
-    <img src="images/references/423a36f45b3f0163b5f81ff8b7144fdb.jpg" alt="">
-    <img src="images/references/3c963ef0e100f155bc36d49385cd70d0.jpg" alt="">
-    <img src="images/references/a68d5eda4254d8cde3327372e108723e.jpg" alt="">
-    <img src="images/references/BCB100E-A-Dims.png" alt="">
-    <img src="images/references/Screenshot 2025-09-26 185900.jpg" alt="">
-    <img src="images/references/wood.jpg" alt="">
-    <img src="images/references/ibizenca.jpg" alt="">
-    <img src="images/references/ibiza.jpg" alt="">
-    <img src="images/references/b1a2f691e6d4aeec32942bef4e1801f4.jpg" alt="">
+    <div class="card"><img src="images/references/3bd4ff8254fc594c18e5fe17f273a2d1.jpg"><span class="number">1</span></div>
+    <div class="card"><img src="images/references/c7ab369978006b8dea6347f771f2d991 (1).jpg"><span class="number">2</span></div>
+    <div class="card"><img src="images/references/a831b2c7df58157212f3e9924fbc3775.jpg"><span class="number">3</span></div>
+    <div class="card"><img src="images/references/423a36f45b3f0163b5f81ff8b7144fdb.jpg"><span class="number">4</span></div>
+    <div class="card"><img src="images/references/3c963ef0e100f155bc36d49385cd70d0.jpg"><span class="number">5</span></div>
+    <div class="card"><img src="images/references/a68d5eda4254d8cde3327372e108723e.jpg"><span class="number">6</span></div>
+    <div class="card"><img src="images/references/BCB100E-A-Dims.png"><span class="number">7</span></div>
+    <div class="card"><img src="images/references/Screenshot 2025-09-26 185900.jpg"><span class="number">8</span></div>
+    <div class="card"><img src="images/references/wood.jpg"><span class="number">9</span></div>
+    <div class="card"><img src="images/references/ibizenca.jpg"><span class="number">10</span></div>
+    <div class="card"><img src="images/references/ibiza.jpg"><span class="number">11</span></div>
+    <div class="card"><img src="images/references/b1a2f691e6d4aeec32942bef4e1801f4.jpg"><span class="number">12</span></div>
   </div>
 
   <!-- Lightbox -->
@@ -100,7 +115,7 @@
   </div>
 
   <script>
-    const imgs = document.querySelectorAll(".grid img");
+    const cards = document.querySelectorAll(".card img");
     const lightbox = document.getElementById("lightbox");
     const lightImg = document.getElementById("lightImg");
     const closeBtn = document.getElementById("closeBtn");
@@ -111,12 +126,12 @@
 
     function showImage(index) {
       currentIndex = index;
-      lightImg.src = imgs[index].src;
-      lightImg.alt = imgs[index].alt;
+      lightImg.src = cards[index].src;
+      lightImg.alt = cards[index].alt;
       lightbox.classList.add("show");
     }
 
-    imgs.forEach((img, index) => {
+    cards.forEach((img, index) => {
       img.addEventListener("click", () => showImage(index));
     });
 
@@ -126,12 +141,12 @@
     });
 
     prevBtn.addEventListener("click", () => {
-      currentIndex = (currentIndex - 1 + imgs.length) % imgs.length;
+      currentIndex = (currentIndex - 1 + cards.length) % cards.length;
       showImage(currentIndex);
     });
 
     nextBtn.addEventListener("click", () => {
-      currentIndex = (currentIndex + 1) % imgs.length;
+      currentIndex = (currentIndex + 1) % cards.length;
       showImage(currentIndex);
     });
 

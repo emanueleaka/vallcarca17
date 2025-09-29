@@ -2,68 +2,124 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8">
-  <title>References</title>
+  <title>Gallery</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     body {
-      font-family: Arial, Helvetica, sans-serif;
       margin: 0;
-      height: 100vh; /* prende tutta la finestra */
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      font-family: Arial, Helvetica, sans-serif;
     }
-    .items {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 40px;
-      text-align: center;
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0; /* nessuno spazio tra le foto */
     }
-    .item a {
-      text-decoration: none;
-      color: inherit;
-    }
-    .item img {
-      width: 200px;
-      height: 200px;
+    .grid img {
+      width: 100%;
+      height: auto;
+      display: block;
       object-fit: cover;
-      border-radius: 8px;
-      transition: transform .2s ease;
+      transition: transform 0.2s ease;
+      cursor: pointer;
     }
-    .item img:hover {
+    .grid img:hover {
       transform: scale(1.05);
-    }
-    .item p {
-      margin-top: 10px;
-      font-size: 18px;
-      font-weight: bold;
+      z-index: 2;
+      position: relative;
     }
 
-    /* 📱 Responsive */
-    @media (max-width: 500px) {
-      .items {
-        flex-direction: column;
-        align-items: center;
-      }
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      background: rgba(0,0,0,0.9);
+      z-index: 9999;
+    }
+    .lightbox img {
+      max-width: 95vw;
+      max-height: 90vh;
+      border-radius: 8px;
+    }
+    .lightbox.show {
+      display: flex;
+    }
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 32px;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .grid { grid-template-columns: repeat(1, 1fr); }
     }
   </style>
 </head>
 <body>
-  <div class="items">
-    <div class="item">
-      <a href="edges.html">
-        <img src="images/references/edges/3f9ea81743b5613d405d359dc94a7795.jpg" alt="Bordes">
-        <p>Bordes</p>
-      </a>
-    </div>
-
-    <div class="item">
-      <a href="lights.html">
-        <img src="images/references/luci.jpg" alt="Luces">
-        <p>Luces</p>
-      </a>
-    </div>
+  <div class="grid">
+    <img src="images/references/3bd4ff8254fc594c18e5fe17f273a2d1.jpg" alt="">
+    <img src="images/references/Screenshot 2025-09-26 185900.jpg" alt="">
+    <img src="images/references/BCB100E-A-Dims.png" alt="">
+    <img src="images/references/c7ab369978006b8dea6347f771f2d991 (1).jpg" alt="">
+    <img src="images/references/a831b2c7df58157212f3e9924fbc3775.jpg" alt="">
+    <img src="images/references/423a36f45b3f0163b5f81ff8b7144fdb.jpg" alt="">
+    <img src="images/references/3c963ef0e100f155bc36d49385cd70d0.jpg" alt="">
+    <img src="images/references/a68d5eda4254d8cde3327372e108723e.jpg" alt="">
+    <img src="images/references/wood.jpg" alt="">
+    <img src="images/references/ibizenca.jpg" alt="">
+    <img src="images/references/ibiza.jpg" alt="">
+    <img src="images/references/b4e8daae22f9b0d7449971706ad45805.jpg" alt="">
+    <img src="images/references/luce.jpg" alt="">
+    <img src="images/references/b1a2f691e6d4aeec32942bef4e1801f4.jpg" alt="">
   </div>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <span class="close" id="closeBtn">×</span>
+    <img id="lightImg" src="" alt="">
+  </div>
+
+  <script>
+    const imgs = document.querySelectorAll(".grid img");
+    const lightbox = document.getElementById("lightbox");
+    const lightImg = document.getElementById("lightImg");
+    const closeBtn = document.getElementById("closeBtn");
+
+    imgs.forEach(img => {
+      img.addEventListener("click", () => {
+        lightImg.src = img.src;
+        lightImg.alt = img.alt;
+        lightbox.classList.add("show");
+      });
+    });
+
+    closeBtn.addEventListener("click", () => {
+      lightbox.classList.remove("show");
+      lightImg.src = "";
+    });
+
+    lightbox.addEventListener("click", (e) => {
+      if (e.target === lightbox) {
+        lightbox.classList.remove("show");
+        lightImg.src = "";
+      }
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        lightbox.classList.remove("show");
+        lightImg.src = "";
+      }
+    });
+  </script>
 </body>
 </html>

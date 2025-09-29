@@ -11,8 +11,8 @@
     .card { position: relative; overflow: hidden; text-align: center; }
     .card img {
       width: 100%;
-      height: 400px;       /* anteprima quadrata */
-      object-fit: cover;   /* ritaglio */
+      height: 400px;              /* anteprima quadrata */
+      object-fit: cover;          /* ritaglio */
       display: block;
       transition: transform .2s ease;
       cursor: pointer;
@@ -39,9 +39,15 @@
       position:fixed; inset:0; display:none;
       justify-content:center; align-items:center;
       background:rgba(0,0,0,.9); z-index:9999; flex-direction:column;
+      padding: 24px;
+      box-sizing: border-box;
     }
-    .lightbox img{ max-width:95vw; max-height:90vh; border-radius:8px; }
+    .lightbox img{ max-width:95vw; max-height:80vh; border-radius:8px; }
     .lightbox.show{ display:flex; }
+    .light-caption{
+      color:#ddd; font: 14px/1.4 Arial, Helvetica, sans-serif;
+      margin-top:12px; text-align:center; max-width:95vw;
+    }
     .close{
       position:absolute; top:20px; right:30px;
       font-size:32px; color:#fff; cursor:pointer;
@@ -60,19 +66,19 @@
 <body>
   <div class="grid">
     <div class="card">
-      <img src="images/project/iving_sqared_A.jpg" alt="">
+      <img src="images/project/living_squar_naked_A.jpg" alt="">
       <span class="number">1</span>
-      <div class="caption">proyecto cuadrado y acotado</div>
+      <div class="caption">proyecto desnudo acotado</div>
     </div>
     <div class="card">
-      <img src="images/project/living_smooth_A.jpg" alt="">
+      <img src="images/project/living_squar_dressed_A.jpg" alt="">
       <span class="number">2</span>
-      <div class="caption">proyecto con efecto bordes redondeados</div>
+      <div class="caption">proyecto con madera acotado</div>
     </div>
     <div class="card">
       <img src="images/project/living_smooth_dressed_A.jpg" alt="">
       <span class="number">3</span>
-      <div class="caption">proyecto con efecto bordes redondeados + tablas de madera y cojín</div>
+      <div class="caption">efecto final con bordes redondeados</div>
     </div>
   </div>
 
@@ -81,45 +87,51 @@
     <span class="close" id="closeBtn">×</span>
     <span class="arrow left" id="prevBtn">❮</span>
     <img id="lightImg" src="" alt="">
+    <div class="light-caption" id="lightCap"></div>
     <span class="arrow right" id="nextBtn">❯</span>
   </div>
 
   <script>
-    const cards = document.querySelectorAll(".card img");
+    const cards = document.querySelectorAll(".card");
+    const imgs  = document.querySelectorAll(".card img");
     const lightbox = document.getElementById("lightbox");
     const lightImg = document.getElementById("lightImg");
+    const lightCap = document.getElementById("lightCap");
     const closeBtn = document.getElementById("closeBtn");
-    const prevBtn = document.getElementById("prevBtn");
-    const nextBtn = document.getElementById("nextBtn");
+    const prevBtn  = document.getElementById("prevBtn");
+    const nextBtn  = document.getElementById("nextBtn");
 
     let currentIndex = 0;
 
     function showImage(i){
       currentIndex = i;
-      lightImg.src = cards[i].src;
-      lightImg.alt = cards[i].alt || "";
+      const img = imgs[i];
+      const cap = cards[i].querySelector(".caption");
+      lightImg.src = img.src;
+      lightImg.alt = img.alt || "";
+      lightCap.textContent = cap ? cap.textContent : "";
       lightbox.classList.add("show");
     }
 
-    cards.forEach((img,i)=> img.addEventListener("click", ()=> showImage(i)));
+    imgs.forEach((img,i)=> img.addEventListener("click", ()=> showImage(i)));
 
-    closeBtn.addEventListener("click", ()=>{ lightbox.classList.remove("show"); lightImg.src=""; });
+    closeBtn.addEventListener("click", ()=>{ lightbox.classList.remove("show"); lightImg.src=""; lightCap.textContent=""; });
 
     prevBtn.addEventListener("click", ()=>{
-      currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+      currentIndex = (currentIndex - 1 + imgs.length) % imgs.length;
       showImage(currentIndex);
     });
     nextBtn.addEventListener("click", ()=>{
-      currentIndex = (currentIndex + 1) % cards.length;
+      currentIndex = (currentIndex + 1) % imgs.length;
       showImage(currentIndex);
     });
 
     lightbox.addEventListener("click", (e)=>{
-      if(e.target === lightbox){ lightbox.classList.remove("show"); lightImg.src=""; }
+      if(e.target === lightbox){ lightbox.classList.remove("show"); lightImg.src=""; lightCap.textContent=""; }
     });
 
     document.addEventListener("keydown", (e)=>{
-      if(e.key === "Escape") { lightbox.classList.remove("show"); lightImg.src=""; }
+      if(e.key === "Escape") { lightbox.classList.remove("show"); lightImg.src=""; lightCap.textContent=""; }
       else if(e.key === "ArrowLeft") { prevBtn.click(); }
       else if(e.key === "ArrowRight") { nextBtn.click(); }
     });

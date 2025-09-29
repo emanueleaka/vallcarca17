@@ -51,17 +51,19 @@
     }
     .card:hover img { transform: scale(1.05); position: relative; z-index: 1; }
 
+    /* Numero in basso a SINISTRA */
     .number{
-      position:absolute; bottom:8px; right:8px;
+      position:absolute; bottom:8px; left:8px;
       background:rgba(0,0,0,.7); color:#fff;
       font: bold 16px/1 Arial, Helvetica, sans-serif;
       padding:4px 8px; border-radius:4px;
       z-index:2; pointer-events:none;
     }
 
+    /* Didascalia in basso a DESTRA */
     .caption {
       position: absolute;
-      left: 8px;
+      right: 8px;
       bottom: 8px;
       background: rgba(0,0,0,.6);
       color: #fff;
@@ -70,8 +72,8 @@
       border-radius: 4px;
       z-index: 2;
       pointer-events: none;
-      max-width: calc(100% - 16px - 70px);
-      text-align: left;
+      max-width: 50%;
+      text-align: right;
     }
 
     /* Lightbox */

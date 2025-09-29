@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8">
-  <title>Gallery</title>
+  <title>References</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     body {
@@ -16,9 +16,9 @@
     }
     .grid img {
       width: 100%;
-      height: auto;
+      height: 400px;       /* altezza fissa per anteprime */
+      object-fit: cover;   /* ritaglia in quadrato */
       display: block;
-      object-fit: cover;
       transition: transform 0.2s ease;
       cursor: pointer;
     }
@@ -96,6 +96,7 @@
 
     imgs.forEach(img => {
       img.addEventListener("click", () => {
+        // carica immagine originale (stesso src)
         lightImg.src = img.src;
         lightImg.alt = img.alt;
         lightbox.classList.add("show");
